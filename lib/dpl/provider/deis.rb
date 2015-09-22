@@ -65,6 +65,13 @@ module DPL
           error 'Running command failed.'
         end
       end
+
+      def cleanup
+        return if options[:skip_cleanup]
+        context.shell "mv deis ~/deis"
+        super
+        context.shell "mv ~/deis deis"
+      end
     end
   end
 end
