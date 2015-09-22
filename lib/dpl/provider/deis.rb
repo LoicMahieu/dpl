@@ -53,6 +53,8 @@ module DPL
       end
 
       def push_app
+        # Little hack: wait a bit for the key being pushed to etcd and to the builder.
+        sleep 10
         unless context.shell "git push deis HEAD:refs/heads/master -f"
           error 'Deploying application failed.'
         end
